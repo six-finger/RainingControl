@@ -19,8 +19,8 @@ public class Activity1 extends AppCompatActivity {
     private Button btNext;
     private String city;
     private String[] cities = new String[]{"苏州"};
-    private String[] ratios = new String[]{"60%","65%","70%","75%","80%","85%"};
-    public float amount;
+    private String[] ratios1 = new String[]{"60%","65%","70%","75%","80%","85%"};
+    public float value;
     public String key;
 
     @Override
@@ -35,8 +35,8 @@ public class Activity1 extends AppCompatActivity {
         btNext = findViewById(R.id.btNext);
 
         //设置 城市为苏州时 的控制率和对应设计降水量值
-        final SharedPreferences SuzhouSharedPreferences = getSharedPreferences("苏州", MODE_PRIVATE);
-        SharedPreferences.Editor editor = SuzhouSharedPreferences.edit();
+        final SharedPreferences SuzhouData = getSharedPreferences("苏州", MODE_PRIVATE);
+        SharedPreferences.Editor editor = SuzhouData.edit();
         editor.putFloat("60%", 12.7f);
         editor.putFloat("65%", 14.9f);
         editor.putFloat("70%", 17.5f);
@@ -47,17 +47,17 @@ public class Activity1 extends AppCompatActivity {
 
         //显示
         //ArrayAdapter<>的形式存储城市数据
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cities);
-        final ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ratios);
+        ArrayAdapter<String> adapterCities = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cities);
+        final ArrayAdapter<String> adapterRatios1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ratios1);
 
-        sp1.setAdapter(adapter1);
+        sp1.setAdapter(adapterCities);
         sp1.setSelection(0,false);   //???test
         sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 city = (String) sp1.getSelectedItem();
                 if(city.equals("苏州")){
-                    sp2.setAdapter(adapter2);
+                    sp2.setAdapter(adapterRatios1);
                 }
             }
 
@@ -70,8 +70,8 @@ public class Activity1 extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 key = (String) sp2.getSelectedItem();
-                amount = SuzhouSharedPreferences.getFloat(key, 0);
-                tv4.setText(String.valueOf(amount));
+                value = SuzhouData.getFloat(key, 0);
+                tv4.setText(String.valueOf(value));
             }
 
             @Override

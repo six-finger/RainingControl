@@ -4,6 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class Activity2 extends AppCompatActivity {
-    private TableLayout tbLayout;
     private CatchmentTypeDBHelper dbHelper;
     private SQLiteDatabase db;
 
@@ -36,7 +36,6 @@ public class Activity2 extends AppCompatActivity {
         DisplayMetrics dm = getResources().getDisplayMetrics();
         final int width = dm.widthPixels;
 
-
         final BaseAdapter adapter = new BaseAdapter() {
             boolean flag = true;
             @Override
@@ -55,50 +54,73 @@ public class Activity2 extends AppCompatActivity {
             }
 
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+            public View getView(final int position, View convertView, ViewGroup parent) {
+                //表格第一行
                 if (flag){
                     LinearLayout ll = new LinearLayout(Activity2.this);
                     ll.setOrientation(LinearLayout.HORIZONTAL);
+                    TextView tv00 = new TextView(Activity2.this);
                     TextView tv01 = new TextView(Activity2.this);
                     TextView tv02 = new TextView(Activity2.this);
                     TextView tv03 = new TextView(Activity2.this);
-                    TextView tv04 = new TextView(Activity2.this);
-                    tv02.setText("汇水面种类");
-                    tv03.setText("雨量径流系数");
-                    tv04.setText("面积");
-                    tv01.setPaddingRelative(5,0,3,0);
-                    tv01.setWidth(60);
-                    tv02.setWidth(width*2/3);
-                    tv03.setWidth(150);
-                    tv04.setPaddingRelative(0,0,0,0);
-                    tv04.setWidth(100);
+                    tv01.setText("汇水面种类");
+                    tv02.setText("雨量径流系数");
+                    tv03.setText("面积");
+                    tv00.setPaddingRelative(5,0,3,0);
+                    tv00.setWidth(width/15);
+                    tv01.setWidth(width*2/3);
+                    tv02.setWidth(width/6);
+                    tv03.setPaddingRelative(0,0,0,0);
+                    tv03.setWidth(width/9);
+                    ll.addView(tv00);
                     ll.addView(tv01);
                     ll.addView(tv02);
                     ll.addView(tv03);
-                    ll.addView(tv04);
                     flag = false;
                     return ll;
                 }
+                //表格第二行开始
                 cursor.moveToNext();
                 LinearLayout ll = new LinearLayout(Activity2.this);
                 ll.setOrientation(LinearLayout.HORIZONTAL);
-                TextView tv01 = new TextView(Activity2.this);
-                TextView tv02 = new TextView(Activity2.this);
-                TextView tv03 = new TextView(Activity2.this);
-                EditText et0 = new EditText(Activity2.this);
-                tv01.setText(cursor.getString(0));
-                tv02.setText(cursor.getString(1));
-                tv03.setText(cursor.getString(2));
-                et0.setText("");
-                tv01.setWidth(60);
-                tv02.setWidth(width*2/3);
-                tv03.setWidth(150);
-                et0.setPaddingRelative(50,0,0,0);
-                et0.setWidth(100);
-                ll.addView(tv01);
-                ll.addView(tv02);
-                ll.addView(tv03);
-                ll.addView(et0);
+                TextView tv0 = new TextView(Activity2.this);
+                TextView tv1 = new TextView(Activity2.this);
+                TextView tv2 = new TextView(Activity2.this);
+                final EditText et3 = new EditText(Activity2.this);
+                tv0.setText(cursor.getString(0));
+                tv1.setText(cursor.getString(1));
+                tv2.setText(cursor.getString(2));
+                et3.setText(cursor.getString(3));
+                tv0.setWidth(width/15);
+                tv1.setWidth(width*2/3);
+                tv2.setWidth(width/6);
+                et3.setWidth(width/9);
+                ll.addView(tv0);
+                ll.addView(tv1);
+                ll.addView(tv2);
+                ll.addView(et3);
+
+                //为editText设置TextChangedListener，每次改变的值设置到hashMap
+                //我们要拿到里面的值根据position拿值
+                et3.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start,
+                                                  int count,int after) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                        float area = Float.parseFloat(et3.getText().toString());
+                        db.execSQL("update Catchment set area = "+area+" where ");
+                    }
+                });
 
                 return ll;
             }

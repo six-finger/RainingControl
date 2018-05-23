@@ -36,6 +36,8 @@ public class CatchmentTypeDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if (oldVersion==1){
+            db.execSQL("update Catchment set area = 0 where area != 0");
+        }
     }
 }
