@@ -1,4 +1,4 @@
-package com.example.rainingcontrol;
+package com.example.rainingControl;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

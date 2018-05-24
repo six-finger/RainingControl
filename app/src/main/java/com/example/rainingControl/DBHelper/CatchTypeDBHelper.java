@@ -1,11 +1,11 @@
-package com.example.rainingcontrol;
+package com.example.rainingControl.DBHelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class CatchmentTypeDBHelper extends SQLiteOpenHelper {
-    public CatchmentTypeDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+public class CatchTypeDBHelper extends SQLiteOpenHelper {
+    public CatchTypeDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 

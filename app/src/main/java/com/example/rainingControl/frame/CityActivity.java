@@ -1,4 +1,4 @@
-package com.example.rainingcontrol;
+package com.example.rainingControl.frame;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,29 +11,37 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class Activity1 extends AppCompatActivity {
-    private TextView tv4;
-    private Spinner sp1;
-    private Spinner sp2;
-    private Button btBack;
-    private Button btNext;
+import com.example.rainingControl.R;
+import com.example.rainingControl.util.ExitActivityUtil;
+
+public class CityActivity extends AppCompatActivity {
+    private TextView textRainfall;
+    private Spinner spinnerCity, spinnerRatio;
+    private Button btBackMain, btNextArea;
     private String city;
     private String[] cities = new String[]{"苏州"};
     private String[] ratios1 = new String[]{"60%","65%","70%","75%","80%","85%"};
-    public float value;
+    public float rainfall;
     public String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_1);
+        setContentView(R.layout.activity_city);
+        ExitActivityUtil.getInstance().addActivity(this);
+        initView();
+        initData();
+    }
 
-        sp1 = findViewById(R.id.sp1);
-        sp2 = findViewById(R.id.sp2);
-        tv4 = findViewById(R.id.tv4);
-        btBack = findViewById(R.id.btBack);
-        btNext = findViewById(R.id.btNext);
+    private void initView() {
+        spinnerCity = findViewById(R.id.spinnerCity);
+        spinnerRatio = findViewById(R.id.spinnerRatio);
+        textRainfall = findViewById(R.id.textRainfall);
+        btBackMain = findViewById(R.id.btBack);
+        btNextArea = findViewById(R.id.btNext);
+    }
 
+    private void initData() {
         //设置 城市为苏州时 的控制率和对应设计降水量值
         final SharedPreferences SuzhouData = getSharedPreferences("苏州", MODE_PRIVATE);
         SharedPreferences.Editor editor = SuzhouData.edit();
@@ -50,14 +58,14 @@ public class Activity1 extends AppCompatActivity {
         ArrayAdapter<String> adapterCities = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cities);
         final ArrayAdapter<String> adapterRatios1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ratios1);
 
-        sp1.setAdapter(adapterCities);
-        sp1.setSelection(0,false);   //???test
-        sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerCity.setAdapter(adapterCities);
+        spinnerCity.setSelection(0,false);   //???test
+        spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                city = (String) sp1.getSelectedItem();
+                city = (String) spinnerCity.getSelectedItem();
                 if(city.equals("苏州")){
-                    sp2.setAdapter(adapterRatios1);
+                    spinnerRatio.setAdapter(adapterRatios1);
                 }
             }
 
@@ -66,29 +74,29 @@ public class Activity1 extends AppCompatActivity {
             }
         });
 
-        sp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerRatio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                key = (String) sp2.getSelectedItem();
-                value = SuzhouData.getFloat(key, 0);
-                tv4.setText(String.valueOf(value));
+                key = (String) spinnerRatio.getSelectedItem();
+                rainfall = SuzhouData.getFloat(key, 0);
+                textRainfall.setText(String.valueOf(rainfall));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        btBack.setOnClickListener(new View.OnClickListener() {
+        btBackMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity1.this, MainActivity.class);
+                Intent intent = new Intent(CityActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-        btNext.setOnClickListener(new View.OnClickListener() {
+        btNextArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity1.this, Activity2.class);
+                Intent intent = new Intent(CityActivity.this, AreaActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,10 +1,17 @@
-package com.example.rainingcontrol;
+package com.example.rainingControl.frame;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.rainingControl.R;
+import com.example.rainingControl.util.ExitActivityUtil;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button btStart;
@@ -15,13 +22,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btStart = findViewById(R.id.bt1);
-        btHistory = findViewById(R.id.bt2);
-        btExit = findViewById(R.id.bt3);
+        ExitActivityUtil.getInstance().addActivity(this);
+        initView();
+        initData();
+    }
+
+    private void initView() {
+        btStart = findViewById(R.id.btStart);
+        btHistory = findViewById(R.id.btHistory);
+        btExit = findViewById(R.id.btExit);
+    }
+
+    private void initData() {
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Activity1.class);
+                Intent intent = new Intent(MainActivity.this, CityActivity.class);
                 startActivity(intent);
             }
         });
@@ -35,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
         btExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.exit(0);
+                ExitActivityUtil.getInstance().exit();
             }
         });
     }
+
+
 }

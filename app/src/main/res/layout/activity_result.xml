@@ -5,30 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".frame.ResultActivity">
 
-    <TextView
-        android:id="@+id/tv1"
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="海绵城市雨水总量控制计算系统" />
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btStart"
+        android:id="@+id/btSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="开始" />
+        android:layout_weight="1"
+        android:text="保存结果" />
 
     <Button
-        android:id="@+id/btHistory"
+        android:id="@+id/btBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="历史" />
+        android:layout_weight="1"
+        android:text="返回上一步" />
 
     <Button
-        android:id="@+id/btExit"
+        android:id="@+id/btMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="退出" />
+        android:layout_weight="1"
+        android:text="返回主菜单" />
+
 </LinearLayout>

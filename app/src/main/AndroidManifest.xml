@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rainingcontrol">
+    package="com.example.rainingControl">
 
     <application
         android:allowBackup="true"
@@ -9,16 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".frame.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity1" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".Activity2"></activity>
+        <activity android:name=".frame.HistoryActivity" />
+        <activity android:name=".frame.CityActivity" />
+        <activity android:name=".frame.AreaActivity" />
+        <activity android:name=".frame.LidActivity" />
+        <activity android:name=".frame.LidDialogActivity" />
+        <activity android:name=".frame.AreaAddActivity" />
+        <activity android:name=".frame.AreaRemoveActivity" />
+        <activity android:name=".frame.ResultActivity"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.rainingcontrol;
+package com.example.rainingControl;
 
 import org.junit.Test;
 
