@@ -24,7 +24,7 @@ public class LidActivity extends AppCompatActivity {
     private void initView() {
         btAdd = findViewById(R.id.btAdd);
         btBack = findViewById(R.id.btBack);
-        btNext = findViewById(R.id.btNext);
+        btNext = findViewById(R.id.btResult);
     }
 
     private void initData() {

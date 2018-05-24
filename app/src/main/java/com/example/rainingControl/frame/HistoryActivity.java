@@ -10,7 +10,7 @@ import com.example.rainingControl.R;
 import com.example.rainingControl.util.ExitActivityUtil;
 
 public class HistoryActivity extends AppCompatActivity {
-    private Button btBack;
+    private Button btReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +22,11 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        btBack = findViewById(R.id.btBack);
+        btReturn = findViewById(R.id.btReturn);
     }
 
     private void initData() {
-        btBack.setOnClickListener(new View.OnClickListener() {
+        btReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HistoryActivity.this, MainActivity.class);

@@ -23,7 +23,7 @@ public class AreaActivity extends AppCompatActivity {
     private CatchTypeDBHelper dbHelper;
     private SQLiteDatabase db;
     private ListView listView;
-    private Button btAdd, btRemove, btBackCity, btNextLid;
+    private Button btAdd, btRemove, btBack, btNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,8 @@ public class AreaActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         btAdd = findViewById(R.id.btAdd);
         btRemove = findViewById(R.id.btRemove);
-        btBackCity = findViewById(R.id.btBack);
-        btNextLid = findViewById(R.id.btNext);
+        btBack = findViewById(R.id.btBack);
+        btNext = findViewById(R.id.btNext);
     }
     void initData(){
         //databaseHelper
@@ -164,14 +164,14 @@ public class AreaActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btBackCity.setOnClickListener(new View.OnClickListener() {
+        btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AreaActivity.this, CityActivity.class);
                 startActivity(intent);
             }
         });
-        btNextLid.setOnClickListener(new View.OnClickListener() {
+        btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AreaActivity.this, LidActivity.class);

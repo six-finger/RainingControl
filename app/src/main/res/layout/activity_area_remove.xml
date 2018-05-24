@@ -20,7 +20,7 @@
             android:text="删除" />
 
         <Button
-            android:id="@+id/btBack"
+            android:id="@+id/btReturn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -30,10 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="上一步" />
+            android:text="@string/Back" />
 
         <Button
-            android:id="@+id/btNext"
+            android:id="@+id/btResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

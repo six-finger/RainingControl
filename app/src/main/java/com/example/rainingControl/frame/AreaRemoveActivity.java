@@ -11,7 +11,7 @@ import com.example.rainingControl.util.ExitActivityUtil;
 
 public class AreaRemoveActivity extends AppCompatActivity {
 
-    private Button btDelete, btBackArea;
+    private Button btRemove, btReturn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,19 +22,19 @@ public class AreaRemoveActivity extends AppCompatActivity {
     }
 
     void initView(){
-        btDelete = findViewById(R.id.btRemove);
-        btBackArea = findViewById(R.id.btBack);
+        btRemove = findViewById(R.id.btRemove);
+        btReturn = findViewById(R.id.btReturn);
     }
 
     void initData(){
-        btDelete.setOnClickListener(new View.OnClickListener() {
+        btRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AreaRemoveActivity.this, AreaActivity.class);
                 startActivity(intent);
             }
         });
-        btBackArea.setOnClickListener(new View.OnClickListener() {
+        btReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AreaRemoveActivity.this, AreaActivity.class);

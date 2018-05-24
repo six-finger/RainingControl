@@ -17,7 +17,7 @@ import com.example.rainingControl.util.ExitActivityUtil;
 public class CityActivity extends AppCompatActivity {
     private TextView textRainfall;
     private Spinner spinnerCity, spinnerRatio;
-    private Button btBackMain, btNextArea;
+    private Button btBack, btNext;
     private String city;
     private String[] cities = new String[]{"苏州"};
     private String[] ratios1 = new String[]{"60%","65%","70%","75%","80%","85%"};
@@ -37,8 +37,8 @@ public class CityActivity extends AppCompatActivity {
         spinnerCity = findViewById(R.id.spinnerCity);
         spinnerRatio = findViewById(R.id.spinnerRatio);
         textRainfall = findViewById(R.id.textRainfall);
-        btBackMain = findViewById(R.id.btBack);
-        btNextArea = findViewById(R.id.btNext);
+        btBack = findViewById(R.id.btBack);
+        btNext = findViewById(R.id.btNext);
     }
 
     private void initData() {
@@ -86,14 +86,14 @@ public class CityActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        btBackMain.setOnClickListener(new View.OnClickListener() {
+        btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CityActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-        btNextArea.setOnClickListener(new View.OnClickListener() {
+        btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CityActivity.this, AreaActivity.class);

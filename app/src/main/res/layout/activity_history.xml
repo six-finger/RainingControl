@@ -14,7 +14,7 @@
     </ListView>
 
     <Button
-        android:id="@+id/btBack"
+        android:id="@+id/btReturn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="返回" />

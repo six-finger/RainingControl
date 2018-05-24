@@ -10,7 +10,7 @@ import com.example.rainingControl.R;
 import com.example.rainingControl.util.ExitActivityUtil;
 
 public class AreaAddActivity extends AppCompatActivity {
-    private Button btSave, btCancel;
+    private Button btSave, btReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class AreaAddActivity extends AppCompatActivity {
 
     void initView(){
         btSave = findViewById(R.id.btSave);
-        btCancel = findViewById(R.id.btCancel);
+        btReturn = findViewById(R.id.btReturn);
     }
 
     void initData(){
@@ -34,7 +34,7 @@ public class AreaAddActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btCancel.setOnClickListener(new View.OnClickListener() {
+        btReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AreaAddActivity.this, AreaActivity.class);

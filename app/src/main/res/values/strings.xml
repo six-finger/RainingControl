@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">RainingControl</string>
+    <string name="app_name">雨水总量控制计算系统</string>
+    <string name="Back">上一步</string>
+    <string name="Next">下一步</string>
 </resources>

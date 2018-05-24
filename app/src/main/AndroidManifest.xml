@@ -19,7 +19,6 @@
         <activity android:name=".frame.CityActivity" />
         <activity android:name=".frame.AreaActivity" />
         <activity android:name=".frame.LidActivity" />
-        <activity android:name=".frame.LidDialogActivity" />
         <activity android:name=".frame.AreaAddActivity" />
         <activity android:name=".frame.AreaRemoveActivity" />
         <activity android:name=".frame.ResultActivity"/>
