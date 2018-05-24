@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:showDividers="middle|beginning|end"
-    tools:context=".frame.AreaActivity">
+    tools:context=".frame.CatchActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

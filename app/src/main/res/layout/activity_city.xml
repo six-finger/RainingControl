@@ -8,7 +8,6 @@
     tools:context=".frame.CityActivity">
 
     <TextView
-        android:id="@+id/tvCity"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="请选择城市" />
@@ -19,7 +18,6 @@
         android:layout_height="40dp" />
 
     <TextView
-        android:id="@+id/tvRatio"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="请选择年径流总量控制率" />
@@ -30,13 +28,12 @@
         android:layout_height="40dp" />
 
     <TextView
-        android:id="@+id/tvTip"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="设计降雨量为：" />
 
     <TextView
-        android:id="@+id/textRainfall"
+        android:id="@+id/tvRainfall"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 

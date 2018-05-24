@@ -5,30 +5,35 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
+import com.example.rainingControl.Adapter.CatchAdapter;
 import com.example.rainingControl.DBHelper.CatchTypeDBHelper;
 import com.example.rainingControl.R;
+import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
 
-public class AreaActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CatchActivity extends AppCompatActivity {
     private CatchTypeDBHelper dbHelper;
     private SQLiteDatabase db;
+    private Cursor cursor;
     private ListView listView;
     private Button btAdd, btRemove, btBack, btNext;
+    public int width;
+    private List<CatchItem> dataList ;
+    private CatchItem item;
+    private CatchAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_area);
+        setContentView(R.layout.activity_catch);
         ExitActivityUtil.getInstance().addActivity(this);
         initView();
         initData();
@@ -41,16 +46,25 @@ public class AreaActivity extends AppCompatActivity {
         btBack = findViewById(R.id.btBack);
         btNext = findViewById(R.id.btNext);
     }
+
     void initData(){
         //databaseHelper
-        dbHelper = new CatchTypeDBHelper(AreaActivity.this,"Rain_DB",null,1);
+        dbHelper = new CatchTypeDBHelper(CatchActivity.this,"Rain_DB",null,1);
         db = dbHelper.getReadableDatabase();
-        final Cursor cursor =db.query("Catchment",null,null,null,null,null,null);
+        cursor =db.query("Catchment",null,null,null,null,null,null);
+        dataList = new ArrayList<>();
+        while (cursor.moveToNext()){
+            item = new CatchItem();
+            item.setText(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3));
+            dataList.add(item);
+        }
+        cursor.close();
+        adapter = new CatchAdapter(this, dataList);
+        listView.setAdapter(adapter);
 
-
-        //得到手机屏幕宽度width
+        /*//得到手机屏幕宽度width
         DisplayMetrics dm = getResources().getDisplayMetrics();
-        final int width = dm.widthPixels;
+        width = dm.widthPixels;
 
         final BaseAdapter adapter = new BaseAdapter() {
             boolean flag = true;
@@ -73,12 +87,12 @@ public class AreaActivity extends AppCompatActivity {
             public View getView(final int position, View convertView, ViewGroup parent) {
                 //表格第一行
                 if (flag){
-                    LinearLayout ll = new LinearLayout(AreaActivity.this);
+                    LinearLayout ll = new LinearLayout(CatchActivity.this);
                     ll.setOrientation(LinearLayout.HORIZONTAL);
-                    TextView tv00 = new TextView(AreaActivity.this);
-                    TextView tv01 = new TextView(AreaActivity.this);
-                    TextView tv02 = new TextView(AreaActivity.this);
-                    TextView tv03 = new TextView(AreaActivity.this);
+                    TextView tv00 = new TextView(CatchActivity.this);
+                    TextView tv01 = new TextView(CatchActivity.this);
+                    TextView tv02 = new TextView(CatchActivity.this);
+                    TextView tv03 = new TextView(CatchActivity.this);
                     tv01.setText("汇水面种类");
                     tv02.setText("雨量径流系数");
                     tv03.setText("面积");
@@ -98,12 +112,12 @@ public class AreaActivity extends AppCompatActivity {
 
                 //表格第二行开始
                 cursor.moveToNext();
-                LinearLayout ll = new LinearLayout(AreaActivity.this);
+                LinearLayout ll = new LinearLayout(CatchActivity.this);
                 ll.setOrientation(LinearLayout.HORIZONTAL);
-                TextView tv0 = new TextView(AreaActivity.this);
-                TextView tv1 = new TextView(AreaActivity.this);
-                TextView tv2 = new TextView(AreaActivity.this);
-                final EditText et3 = new EditText(AreaActivity.this);
+                TextView tv0 = new TextView(CatchActivity.this);
+                TextView tv1 = new TextView(CatchActivity.this);
+                TextView tv2 = new TextView(CatchActivity.this);
+                final EditText et3 = new EditText(CatchActivity.this);
 //                tv0.setText(cursor.getString(0));
 //                tv1.setText(cursor.getString(1));
 //                tv2.setText(cursor.getString(2));
@@ -126,7 +140,7 @@ public class AreaActivity extends AppCompatActivity {
             }
         };
         listView.setAdapter(adapter);
-
+*/
         //为editText设置TextChangedListener，每次改变的值设置到hashMap
         //我们要拿到里面的值根据position拿值
         /*
@@ -153,28 +167,28 @@ public class AreaActivity extends AppCompatActivity {
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AreaActivity.this, AreaAddActivity.class);
+                Intent intent = new Intent(CatchActivity.this, CatchAddActivity.class);
                 startActivity(intent);
             }
         });
         btRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AreaActivity.this, AreaRemoveActivity.class);
+                Intent intent = new Intent(CatchActivity.this, CatchRemoveActivity.class);
                 startActivity(intent);
             }
         });
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AreaActivity.this, CityActivity.class);
+                Intent intent = new Intent(CatchActivity.this, CityActivity.class);
                 startActivity(intent);
             }
         });
         btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AreaActivity.this, LidActivity.class);
+                Intent intent = new Intent(CatchActivity.this, LidActivity.class);
                 startActivity(intent);
             }
         });

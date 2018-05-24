@@ -32,12 +32,11 @@ public class CatchTypeDBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into Catchment(type,coefficient) values('地下建筑覆土绿地（覆土≥500mm）', '0.15');");
         db.execSQL("insert into Catchment(type,coefficient) values('地下建筑覆土绿地（覆土<500mm）', '0.35');");
         db.execSQL("insert into Catchment(type,coefficient) values('透水铺装地面', '0.20');");
+        db.close();
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion==1){
-            db.execSQL("update Catchment set area = 0 where area != 0");
-        }
+
     }
 }

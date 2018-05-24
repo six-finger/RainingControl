@@ -36,7 +36,7 @@ public class CityActivity extends AppCompatActivity {
     private void initView() {
         spinnerCity = findViewById(R.id.spinnerCity);
         spinnerRatio = findViewById(R.id.spinnerRatio);
-        textRainfall = findViewById(R.id.textRainfall);
+        textRainfall = findViewById(R.id.tvRainfall);
         btBack = findViewById(R.id.btBack);
         btNext = findViewById(R.id.btNext);
     }
@@ -53,8 +53,7 @@ public class CityActivity extends AppCompatActivity {
         editor.putFloat("85%", 30.9f);
         editor.apply();
 
-        //显示
-        //ArrayAdapter<>的形式存储城市数据
+        //城市、控制率数据存储在ArrayAdapter<>中
         ArrayAdapter<String> adapterCities = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cities);
         final ArrayAdapter<String> adapterRatios1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ratios1);
 
@@ -96,7 +95,7 @@ public class CityActivity extends AppCompatActivity {
         btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CityActivity.this, AreaActivity.class);
+                Intent intent = new Intent(CityActivity.this, CatchActivity.class);
                 startActivity(intent);
             }
         });
