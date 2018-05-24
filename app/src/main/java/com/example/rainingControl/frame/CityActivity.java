@@ -51,7 +51,7 @@ public class CityActivity extends AppCompatActivity {
         editor.putFloat("75%", 20.8f);
         editor.putFloat("80%", 25.1f);
         editor.putFloat("85%", 30.9f);
-        editor.commit();
+        editor.apply();
 
         //显示
         //ArrayAdapter<>的形式存储城市数据
