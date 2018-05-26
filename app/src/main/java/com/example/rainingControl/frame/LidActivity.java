@@ -37,8 +37,7 @@ public class LidActivity extends AppCompatActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LidActivity.this, CatchActivity.class);
-                startActivity(intent);
+                LidActivity.this.finish();
             }
         });
         btNext.setOnClickListener(new View.OnClickListener() {

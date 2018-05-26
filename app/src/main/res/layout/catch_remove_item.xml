@@ -19,11 +19,13 @@
         android:layout_weight="2"
         android:text="TextView" />
 
-    <EditText
-        android:id="@+id/etArea"
+    <Button
+        android:id="@+id/btDelete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:text="删除" />
+
 </LinearLayout>

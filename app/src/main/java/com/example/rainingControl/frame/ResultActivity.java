@@ -37,8 +37,7 @@ public class ResultActivity extends AppCompatActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResultActivity.this, LidActivity.class);
-                startActivity(intent);
+                ResultActivity.this.finish();
             }
         });
         btMain.setOnClickListener(new View.OnClickListener() {

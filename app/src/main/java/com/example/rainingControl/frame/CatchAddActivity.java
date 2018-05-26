@@ -1,6 +1,5 @@
 package com.example.rainingControl.frame;
 
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import android.widget.EditText;
 
 import com.example.rainingControl.DBHelper.CatchTypeDBHelper;
 import com.example.rainingControl.R;
+import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
 
 public class CatchAddActivity extends AppCompatActivity {
@@ -17,6 +17,7 @@ public class CatchAddActivity extends AppCompatActivity {
     private EditText etType, etCoefficient;
     private CatchTypeDBHelper dbHelper;
     private SQLiteDatabase db;
+    public static CatchItem itemAdd;            //itemAdd将会传到CatchActivit.class中
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,29 +39,17 @@ public class CatchAddActivity extends AppCompatActivity {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean flag = true;
-                Object args[] = new Object[]{String.valueOf(etType.getText()),String.valueOf(etCoefficient.getText())};
+                itemAdd = new CatchItem(String.valueOf(etType.getText()), String.valueOf(etCoefficient.getText()));
                 dbHelper = new CatchTypeDBHelper(CatchAddActivity.this,"Rain_DB",null,1);
                 db = dbHelper.getReadableDatabase();
-                try {
-                    db.execSQL("insert into Catchment(type,coefficient) values(?, ?);",args);
-                }
-                catch (Exception e){
-                    flag = false;
-                    throw e;
-                }
-                db.close();
-                if (flag) {
-                    Intent intent = new Intent(CatchAddActivity.this, CatchActivity.class);
-                    startActivity(intent);
-                }
+                db.execSQL("insert into Catchment(type,coefficient) values(?, ?);", new Object[]{itemAdd.getType(), itemAdd.getCoefficient()});
+                CatchAddActivity.this.finish();
             }
         });
         btReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CatchAddActivity.this, CatchActivity.class);
-                startActivity(intent);
+                CatchAddActivity.this.finish();
             }
         });
     }

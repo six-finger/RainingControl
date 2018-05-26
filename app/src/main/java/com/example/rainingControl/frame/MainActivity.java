@@ -1,6 +1,5 @@
 package com.example.rainingControl.frame;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +8,6 @@ import android.widget.Button;
 
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.ExitActivityUtil;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button btStart;

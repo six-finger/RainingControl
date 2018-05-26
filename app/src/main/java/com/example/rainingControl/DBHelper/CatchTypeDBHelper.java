@@ -12,10 +12,8 @@ public class CatchTypeDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "create table Catchment(" +
-                "id integer primary key autoincrement," +
                 "type text not null," +
-                "coefficient real not null," +
-                "area real );";
+                "coefficient real not null);";
         db.execSQL(sql);
         db.execSQL("insert into Catchment(type,coefficient) values('绿化屋面(绿色屋顶,基质层厚度≥300mm)', '0.35');");
         db.execSQL("insert into Catchment(type,coefficient) values('硬屋面、未铺石子的平屋面、沥青屋面', '0.85');");
@@ -32,7 +30,6 @@ public class CatchTypeDBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into Catchment(type,coefficient) values('地下建筑覆土绿地（覆土≥500mm）', '0.15');");
         db.execSQL("insert into Catchment(type,coefficient) values('地下建筑覆土绿地（覆土<500mm）', '0.35');");
         db.execSQL("insert into Catchment(type,coefficient) values('透水铺装地面', '0.20');");
-        db.close();
     }
 
     @Override

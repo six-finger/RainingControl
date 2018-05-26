@@ -29,8 +29,7 @@ public class HistoryActivity extends AppCompatActivity {
         btReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HistoryActivity.this, MainActivity.class);
-                startActivity(intent);
+                HistoryActivity.this.finish();
             }
         });
     }
