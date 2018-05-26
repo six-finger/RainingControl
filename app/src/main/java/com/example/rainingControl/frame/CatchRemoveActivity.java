@@ -49,12 +49,12 @@ public class CatchRemoveActivity extends AppCompatActivity {
         dbHelper = new CatchTypeDBHelper(CatchRemoveActivity.this,"Rain_DB",null,1);
         db = dbHelper.getReadableDatabase();
         cursor =db.query("Catchment",null,null,null,null,null,null);
+        cursor.moveToPosition(14);
         itemList = new ArrayList<>();
         while (cursor.moveToNext()){
             item = new CatchItem(cursor.getString(0),cursor.getString(1));
             itemList.add(item);
         }
-        cursor.close();
 
         removeAdapter = new CatchRemoveAdapter(this, itemList);
         listView.setAdapter(removeAdapter);
@@ -63,10 +63,10 @@ public class CatchRemoveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("TAG","待删除记录:"+deletedTypeList.toString());
-                cursor =db.query("Catchment",null,null,null,null,null,null);
                 for (String deletedType: deletedTypeList) {
                     db.execSQL("delete from Catchment where type='"+ deletedType+"'");
                 }
+                cursor.close();
                 CatchRemoveActivity.this.finish();
             }
         });
