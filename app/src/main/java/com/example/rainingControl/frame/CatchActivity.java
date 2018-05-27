@@ -16,7 +16,6 @@ import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.example.rainingControl.Adapter.CatchRemoveAdapter.deletedList;
@@ -30,7 +29,6 @@ public class CatchActivity extends AppCompatActivity {
     private SQLiteDatabase db;
     private CatchItem item;
     private CatchAdapter adapter;
-
     public static List<CatchItem> itemList;
 
     @Override

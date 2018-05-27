@@ -48,6 +48,7 @@ public class CatchRemoveActivity extends AppCompatActivity {
         dbHelper = new CatchTypeDBHelper(CatchRemoveActivity.this,"Rain_DB",null,1);
         db = dbHelper.getReadableDatabase();
         cursor =db.query("Catchment",null,null,null,null,null,null);
+        cursor.moveToPosition(14);
         itemListTemp = new ArrayList<>();
         while (cursor.moveToNext()){
             item = new CatchItem(cursor.getString(0),cursor.getString(1));

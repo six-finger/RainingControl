@@ -24,11 +24,6 @@ public class CatchRemoveAdapter extends BaseAdapter {
         itemListTemp = iList;
     }
 
-    //得到position项的Type值（数据库中该条记录的主键）
-    private String getItemKey(int position) {
-        return itemListTemp.get(position).getType();
-    }
-
     @Override
     public int getCount() {
         return itemListTemp.size();
