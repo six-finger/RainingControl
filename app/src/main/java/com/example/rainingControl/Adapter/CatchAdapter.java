@@ -12,13 +12,14 @@ import com.example.rainingControl.util.CatchItem;
 
 import java.util.List;
 
+import static com.example.rainingControl.frame.CatchActivity.itemList;
+
 public class CatchAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private List<CatchItem> itemList;
 
-    public CatchAdapter(Context context, List<CatchItem> itemList) {
+    public CatchAdapter(Context context, List<CatchItem> list) {
         this.inflater = LayoutInflater.from(context);
-        this.itemList = itemList;
+        itemList = list;
     }
 
     @Override
@@ -50,6 +51,7 @@ public class CatchAdapter extends BaseAdapter {
         else {
             holder = (ViewHolder) convertView.getTag();
         }
+        notifyDataSetChanged();
         CatchItem item = itemList.get(position);
         holder.tvType.setText(item.getType());
         holder.tvCoefficient.setText(item.getCoefficient());

@@ -12,12 +12,14 @@ import com.example.rainingControl.R;
 import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
 
+import static com.example.rainingControl.frame.CatchActivity.itemList;
+
 public class CatchAddActivity extends AppCompatActivity {
     private Button btSave, btReturn;
     private EditText etType, etCoefficient;
     private CatchTypeDBHelper dbHelper;
     private SQLiteDatabase db;
-    public static CatchItem itemAdd;            //itemAdd将会传到CatchActivit.class中
+    public static CatchItem itemAdd;            //itemAdd为添加的CatchItem
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class CatchAddActivity extends AppCompatActivity {
                 dbHelper = new CatchTypeDBHelper(CatchAddActivity.this,"Rain_DB",null,1);
                 db = dbHelper.getReadableDatabase();
                 db.execSQL("insert into Catchment(type,coefficient) values(?, ?);", new Object[]{itemAdd.getType(), itemAdd.getCoefficient()});
+                itemList.add(itemAdd);
                 CatchAddActivity.this.finish();
             }
         });

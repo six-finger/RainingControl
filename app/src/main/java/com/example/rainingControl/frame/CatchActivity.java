@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -17,9 +16,10 @@ import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import static com.example.rainingControl.Adapter.CatchRemoveAdapter.deletedTypeList;
+import static com.example.rainingControl.Adapter.CatchRemoveAdapter.deletedList;
 import static com.example.rainingControl.frame.CatchAddActivity.itemAdd;
 
 public class CatchActivity extends AppCompatActivity {
@@ -28,9 +28,10 @@ public class CatchActivity extends AppCompatActivity {
     private Cursor cursor;
     private CatchTypeDBHelper dbHelper;
     private SQLiteDatabase db;
-    private List<CatchItem> itemList;
     private CatchItem item;
     private CatchAdapter adapter;
+
+    public static List<CatchItem> itemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,27 +40,6 @@ public class CatchActivity extends AppCompatActivity {
         ExitActivityUtil.getInstance().addActivity(this);
         initView();
         initData();
-    }
-
-    //添加一条记录后，返回到本页面所需的刷新，即：把itemAdd添加到itemList之后，重新声明adapter，并将itemAdd设为空值
-    //删除记录保存后，返回到本页面所需的刷新，即：把deletedTypeList中的数据在itemList中删掉之后，重新声明adapter，并将deletedTypeLis设为空值
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (itemAdd != null) {
-            itemList.add(itemAdd);
-            adapter = new CatchAdapter(this, itemList);
-            Log.i("TAG","已添加记录:"+itemAdd);
-            itemAdd = null;
-        }
-        if (deletedTypeList.size()!=0){
-            for (String type: deletedTypeList) {
-                itemList.remove(type);
-            }
-            adapter = new CatchAdapter(this,itemList);
-            Log.i("TAG","已删除记录:"+deletedTypeList.toString());
-            deletedTypeList = new ArrayList<>();
-        }
     }
 
     void initView(){
@@ -98,7 +78,6 @@ public class CatchActivity extends AppCompatActivity {
         btRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(CatchActivity.this, CatchRemoveActivity.class);
                 startActivity(intent);
             }
@@ -116,5 +95,33 @@ public class CatchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshAdd();
+        refreshRemove();
+    }
+    /**
+     * 添加一条记录后，返回到本页面所需的刷新：
+     * 把itemAdd添加到itemList中，重新声明adapter，并将itemAdd设为空值
+     */
+    void refreshAdd() {
+        if (itemAdd != null) {
+            adapter.notifyDataSetChanged();
+            itemAdd = null;
+        }
+    }
+
+    /**
+     * 删除记录保存后，返回到本页面所需的刷新：
+     * 把deletedTypeList中的数据在itemList中删掉之后，重新声明adapter，并将deletedTypeLis设为空值
+     */
+    void refreshRemove() {
+        if (deletedList.size()!=0){
+            adapter.notifyDataSetChanged();
+            deletedList.clear();
+        }
     }
 }
