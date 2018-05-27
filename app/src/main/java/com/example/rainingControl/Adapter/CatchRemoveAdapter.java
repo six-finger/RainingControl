@@ -16,22 +16,22 @@ import java.util.List;
 
 public class CatchRemoveAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    public static List<CatchItem> itemListTemp = new ArrayList<>();             //为所有在该页面上显示的item建立一个列表
+    public static List<CatchItem> catchListTemp = new ArrayList<>();             //为所有在该页面上显示的item建立一个列表
     public static List<CatchItem> deletedList = new ArrayList<>();             //将所有 待删除的item 放入该List中
 
     public CatchRemoveAdapter(Context context, List<CatchItem> iList) {
         this.inflater = LayoutInflater.from(context);
-        itemListTemp = iList;
+        catchListTemp = iList;
     }
 
     @Override
     public int getCount() {
-        return itemListTemp.size();
+        return catchListTemp.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return itemListTemp.get(position);
+        return catchListTemp.get(position);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class CatchRemoveAdapter extends BaseAdapter {
         else {
             holder = (ViewHolder) convertView.getTag();
         }
-        CatchItem item = itemListTemp.get(position);
+        CatchItem item = catchListTemp.get(position);
         holder.tvType.setText(item.getType());
         holder.tvCoefficient.setText(item.getCoefficient());
         //点击删除后：
@@ -64,7 +64,7 @@ public class CatchRemoveAdapter extends BaseAdapter {
             public void onClick(View v) {
                 deletedList.add((CatchItem) getItem(position));
                 Long p = getItemId(position);
-                itemListTemp.remove(position);
+                catchListTemp.remove(position);
                 notifyDataSetChanged();
             }
         });

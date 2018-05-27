@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.rainingControl.Adapter.CatchRemoveAdapter;
-import com.example.rainingControl.DBHelper.CatchTypeDBHelper;
+import com.example.rainingControl.DBHelper.CatchDBHelper;
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
@@ -17,13 +17,13 @@ import com.example.rainingControl.util.ExitActivityUtil;
 import java.util.ArrayList;
 
 import static com.example.rainingControl.Adapter.CatchRemoveAdapter.deletedList;
-import static com.example.rainingControl.Adapter.CatchRemoveAdapter.itemListTemp;
-import static com.example.rainingControl.frame.CatchActivity.itemList;
+import static com.example.rainingControl.Adapter.CatchRemoveAdapter.catchListTemp;
+import static com.example.rainingControl.frame.CatchActivity.catchList;
 
 public class CatchRemoveActivity extends AppCompatActivity {
     private Button btSave, btReturn;
     private ListView listView;
-    private CatchTypeDBHelper dbHelper;
+    private CatchDBHelper dbHelper;
     private SQLiteDatabase db;
     private Cursor cursor;
     private CatchItem item;
@@ -45,17 +45,17 @@ public class CatchRemoveActivity extends AppCompatActivity {
     }
 
     void initData(){
-        dbHelper = new CatchTypeDBHelper(CatchRemoveActivity.this,"Rain_DB",null,1);
+        dbHelper = new CatchDBHelper(CatchRemoveActivity.this,"Rain_DB",null,1);
         db = dbHelper.getReadableDatabase();
         cursor =db.query("Catchment",null,null,null,null,null,null);
         cursor.moveToPosition(14);
-        itemListTemp = new ArrayList<>();
+        catchListTemp = new ArrayList<>();
         while (cursor.moveToNext()){
             item = new CatchItem(cursor.getString(0),cursor.getString(1));
-            itemListTemp.add(item);
+            catchListTemp.add(item);
         }
 
-        removeAdapter = new CatchRemoveAdapter(this, itemListTemp);
+        removeAdapter = new CatchRemoveAdapter(this, catchListTemp);
         listView.setAdapter(removeAdapter);
 
         //点击保存（保存删除操作）：
@@ -69,10 +69,10 @@ public class CatchRemoveActivity extends AppCompatActivity {
                 }
                 cursor.close();
                 for (CatchItem item1:deletedList) {
-                    for (int i=itemList.size()-1;i>=0;i--){
-                        CatchItem item2 = itemList.get(i);
+                    for (int i = catchList.size()-1; i>=0; i--){
+                        CatchItem item2 = catchList.get(i);
                         if (item1.getType().equals(item2.getType()) && item1.getCoefficient().equals(item2.getCoefficient())) {
-                            itemList.remove(item2);
+                            catchList.remove(item2);
                             break;
                         }
                     }
@@ -84,7 +84,7 @@ public class CatchRemoveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 deletedList.clear();
-                itemListTemp.clear();
+                catchListTemp.clear();
                 cursor.close();
                 CatchRemoveActivity.this.finish();
             }

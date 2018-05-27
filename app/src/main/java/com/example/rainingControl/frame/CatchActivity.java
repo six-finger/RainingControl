@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.rainingControl.Adapter.CatchAdapter;
-import com.example.rainingControl.DBHelper.CatchTypeDBHelper;
+import com.example.rainingControl.DBHelper.CatchDBHelper;
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
@@ -19,17 +19,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.rainingControl.Adapter.CatchRemoveAdapter.deletedList;
-import static com.example.rainingControl.frame.CatchAddActivity.itemAdd;
+import static com.example.rainingControl.frame.CatchAddActivity.catchAdd;
 
 public class CatchActivity extends AppCompatActivity {
     private ListView listView;
     private Button btAdd, btRemove, btBack, btNext;
     private Cursor cursor;
-    private CatchTypeDBHelper dbHelper;
+    private CatchDBHelper dbHelper;
     private SQLiteDatabase db;
     private CatchItem item;
     private CatchAdapter adapter;
-    public static List<CatchItem> itemList;
+    public static List<CatchItem> catchList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +49,19 @@ public class CatchActivity extends AppCompatActivity {
     }
 
     void initData(){
-        //通过cursor将数据放到itemList中
-        dbHelper = new CatchTypeDBHelper(CatchActivity.this,"Rain_DB",null,1);
+        //通过cursor将数据放到catchList中
+        dbHelper = new CatchDBHelper(CatchActivity.this,"Rain_DB",null,1);
         db = dbHelper.getReadableDatabase();
         cursor =db.query("Catchment",null,null,null,null,null,null);
-        itemList = new ArrayList<>();
+        catchList = new ArrayList<>();
         while (cursor.moveToNext()){
             item = new CatchItem(cursor.getString(0),cursor.getString(1));
-            itemList.add(item);
+            catchList.add(item);
         }
         cursor.close();
 
-        //将itemList放到本页面的adapter中
-        adapter = new CatchAdapter(this, itemList);
+        //将catchList放到本页面的adapter中
+        adapter = new CatchAdapter(this, catchList);
         listView.setAdapter(adapter);
         db.close();
 
@@ -101,21 +101,15 @@ public class CatchActivity extends AppCompatActivity {
         refreshAdd();
         refreshRemove();
     }
-    /**
-     * 添加一条记录后，返回到本页面所需的刷新：
-     * 把itemAdd添加到itemList中，重新声明adapter，并将itemAdd设为空值
-     */
+    //添加一条记录后，返回到本页面所需的刷新操作和变量重置
     void refreshAdd() {
-        if (itemAdd != null) {
+        if (catchAdd != null) {
             adapter.notifyDataSetChanged();
-            itemAdd = null;
+            catchAdd = null;
         }
     }
 
-    /**
-     * 删除记录保存后，返回到本页面所需的刷新：
-     * 把deletedTypeList中的数据在itemList中删掉之后，重新声明adapter，并将deletedTypeLis设为空值
-     */
+    //保存删除记录后，返回到本页面所需的刷新操作和变量重置
     void refreshRemove() {
         if (deletedList.size()!=0){
             adapter.notifyDataSetChanged();

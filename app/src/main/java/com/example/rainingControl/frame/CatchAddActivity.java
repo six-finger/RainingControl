@@ -7,19 +7,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.rainingControl.DBHelper.CatchTypeDBHelper;
+import com.example.rainingControl.DBHelper.CatchDBHelper;
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
 
-import static com.example.rainingControl.frame.CatchActivity.itemList;
+import static com.example.rainingControl.frame.CatchActivity.catchList;
 
 public class CatchAddActivity extends AppCompatActivity {
     private Button btSave, btReturn;
     private EditText etType, etCoefficient;
-    private CatchTypeDBHelper dbHelper;
+    private CatchDBHelper dbHelper;
     private SQLiteDatabase db;
-    public static CatchItem itemAdd;            //itemAdd为添加的CatchItem
+    public static CatchItem catchAdd;            //itemAdd为添加的CatchItem
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +41,11 @@ public class CatchAddActivity extends AppCompatActivity {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemAdd = new CatchItem(String.valueOf(etType.getText()), String.valueOf(etCoefficient.getText()));
-                dbHelper = new CatchTypeDBHelper(CatchAddActivity.this,"Rain_DB",null,1);
+                catchAdd = new CatchItem(String.valueOf(etType.getText()), String.valueOf(etCoefficient.getText()));
+                dbHelper = new CatchDBHelper(CatchAddActivity.this,"Rain_DB",null,1);
                 db = dbHelper.getReadableDatabase();
-                db.execSQL("insert into Catchment(type,coefficient) values(?, ?);", new Object[]{itemAdd.getType(), itemAdd.getCoefficient()});
-                itemList.add(itemAdd);
+                db.execSQL("insert into Catchment(type,coefficient) values(?, ?);", new Object[]{catchAdd.getType(), catchAdd.getCoefficient()});
+                catchList.add(catchAdd);
                 CatchAddActivity.this.finish();
             }
         });
