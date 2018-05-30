@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lidName2">
+        <item>植草沟</item>
+        <item>生物滞留池</item>
+        <item>雨水塘</item>
+        <item>储水装置</item>
+    </string-array>
+</resources>

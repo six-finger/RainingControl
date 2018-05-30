@@ -5,13 +5,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
+import com.example.rainingControl.Adapter.LidAdapter;
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.ExitActivityUtil;
+import com.example.rainingControl.util.LidItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LidActivity extends AppCompatActivity {
 
-    private Button btAdd, btBack, btNext;
+    private Button btAdd, btRemove, btBack, btNext;
+    private ListView listView;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
+    public static List<LidItem> lidList = new ArrayList<>();
+    private LidAdapter adapter;
+    private LidAddDialog dialog = new LidAddDialog(LidActivity.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,15 +41,26 @@ public class LidActivity extends AppCompatActivity {
 
     private void initView() {
         btAdd = findViewById(R.id.btAdd);
+        btRemove = findViewById(R.id.btRemove);
         btBack = findViewById(R.id.btBack);
         btNext = findViewById(R.id.btResult);
+        listView = findViewById(R.id.listView);
     }
 
     private void initData() {
+        adapter = new LidAdapter(LidActivity.this);
+        listView.setAdapter(adapter);
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dialog.show();
+            }
+        });
+        btRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LidActivity.this, LidRemoveActivity.class);
+                startActivity(intent);
             }
         });
         btBack.setOnClickListener(new View.OnClickListener() {

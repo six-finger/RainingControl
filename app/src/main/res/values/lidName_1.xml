@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lidName1">
+        <item>屋顶绿化</item>
+        <item>透水铺装</item>
+    </string-array>
+</resources>

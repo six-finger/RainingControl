@@ -15,12 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".frame.HistoryActivity" />
-        <activity android:name=".frame.CityActivity" />
         <activity android:name=".frame.CatchActivity" />
-        <activity android:name=".frame.LidActivity" />
         <activity android:name=".frame.CatchAddActivity" />
         <activity android:name=".frame.CatchRemoveActivity" />
+        <activity android:name=".frame.CityActivity" />
+        <activity android:name=".frame.HistoryActivity" />
+        <activity android:name=".frame.LidActivity"/>
+        <activity android:name=".frame.LidRemoveActivity"/>
         <activity android:name=".frame.ResultActivity"/>
     </application>
 

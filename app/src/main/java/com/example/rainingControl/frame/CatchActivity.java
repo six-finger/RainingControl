@@ -101,6 +101,7 @@ public class CatchActivity extends AppCompatActivity {
         refreshAdd();
         refreshRemove();
     }
+
     //添加一条记录后，返回到本页面所需的刷新操作和变量重置
     void refreshAdd() {
         if (catchAdd != null) {

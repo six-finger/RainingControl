@@ -43,7 +43,7 @@ public class CatchRemoveAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.catch_remove_item, parent, false);
+            convertView = inflater.inflate(R.layout.item_catch_remove, parent, false);
             holder = new ViewHolder();
             holder.tvType = convertView.findViewById(R.id.tvType);
             holder.tvCoefficient = convertView.findViewById(R.id.tvCoefficient);
