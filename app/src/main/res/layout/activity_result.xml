@@ -8,6 +8,7 @@
     tools:context=".frame.ResultActivity">
 
     <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -15,21 +16,18 @@
         android:id="@+id/btSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="保存结果" />
 
     <Button
         android:id="@+id/btBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="返回上一步" />
 
     <Button
         android:id="@+id/btMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="返回主菜单" />
 
 </LinearLayout>

@@ -8,11 +8,17 @@ import android.widget.Button;
 
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.ExitActivityUtil;
+import com.example.rainingControl.util.ListDataSave;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button btStart;
     private Button btHistory;
     private Button btExit;
+    public static List<String> resultList;
+    public static ListDataSave resultSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resultList = new ArrayList<>();
                 Intent intent = new Intent(MainActivity.this, CityActivity.class);
                 startActivity(intent);
             }

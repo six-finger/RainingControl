@@ -13,12 +13,14 @@ import com.example.rainingControl.DBHelper.CatchDBHelper;
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
+import com.example.rainingControl.util.ListDataSave;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.rainingControl.Adapter.CatchRemoveAdapter.deletedList;
-import static com.example.rainingControl.Adapter.CatchRemoveAdapter.catchListTemp;
 import static com.example.rainingControl.frame.CatchActivity.catchList;
+import static com.example.rainingControl.frame.CatchActivity.catchSave;
 
 public class CatchRemoveActivity extends AppCompatActivity {
     private Button btSave, btReturn;
@@ -28,6 +30,7 @@ public class CatchRemoveActivity extends AppCompatActivity {
     private Cursor cursor;
     private CatchItem item;
     private CatchRemoveAdapter removeAdapter;
+    private List<CatchItem> catchListTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,38 +48,26 @@ public class CatchRemoveActivity extends AppCompatActivity {
     }
 
     void initData(){
-        dbHelper = new CatchDBHelper(CatchRemoveActivity.this,"Rain_DB",null,1);
-        db = dbHelper.getReadableDatabase();
-        cursor =db.query("Catchment",null,null,null,null,null,null);
-        cursor.moveToPosition(14);
         catchListTemp = new ArrayList<>();
-        while (cursor.moveToNext()){
-            item = new CatchItem(cursor.getString(0),cursor.getString(1));
-            catchListTemp.add(item);
+        for (int i=15;i<catchList.size();i++) {
+            catchListTemp.add(catchList.get(i));
         }
-
         removeAdapter = new CatchRemoveAdapter(this, catchListTemp);
         listView.setAdapter(removeAdapter);
 
-        //点击保存（保存删除操作）：
-        // 1. 第一个for循环：在数据库中删除该记录
-        // 2. 第二个for循环：在itemList中删除该记录
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (CatchItem item: deletedList) {
-                    db.execSQL("delete from Catchment where type='"+ item.getType()+"'");
-                }
-                cursor.close();
                 for (CatchItem item1:deletedList) {
                     for (int i = catchList.size()-1; i>=0; i--){
                         CatchItem item2 = catchList.get(i);
-                        if (item1.getType().equals(item2.getType()) && item1.getCoefficient().equals(item2.getCoefficient())) {
+                        if (item1.getType().equals(item2.getType()) && item1.getCoefficient()==(item2.getCoefficient())) {
                             catchList.remove(item2);
                             break;
                         }
                     }
                 }
+                catchSave.setDataList("catchment", catchList);
                 CatchRemoveActivity.this.finish();
             }
         });
@@ -85,7 +76,6 @@ public class CatchRemoveActivity extends AppCompatActivity {
             public void onClick(View v) {
                 deletedList.clear();
                 catchListTemp.clear();
-                cursor.close();
                 CatchRemoveActivity.this.finish();
             }
         });

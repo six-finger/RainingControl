@@ -35,12 +35,18 @@ public class ExitActivityUtil extends AppCompatActivity {
         activityList.add(activity);
     }
     /**
-     * 遍歷所有Activity 并退出
+     * 遍历所有Activity 并退出
      */
     public void exit(){
         for(Activity activity : activityList){
             activity.finish();
         }
         System.exit(0);
+    }
+
+    public void initMain() {
+        for (int i=activityList.size()-1;i>0;i--) {
+            activityList.get(i).finish();
+        }
     }
 }

@@ -1,8 +1,6 @@
 package com.example.rainingControl.frame;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +8,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.rainingControl.Adapter.CatchAdapter;
-import com.example.rainingControl.DBHelper.CatchDBHelper;
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.CatchItem;
 import com.example.rainingControl.util.ExitActivityUtil;
+import com.example.rainingControl.util.ListDataSave;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +22,8 @@ import static com.example.rainingControl.frame.CatchAddActivity.catchAdd;
 public class CatchActivity extends AppCompatActivity {
     private ListView listView;
     private Button btAdd, btRemove, btBack, btNext;
-    private Cursor cursor;
-    private CatchDBHelper dbHelper;
-    private SQLiteDatabase db;
-    private CatchItem item;
     private CatchAdapter adapter;
+    public static ListDataSave catchSave;
     public static List<CatchItem> catchList;
 
     @Override
@@ -49,21 +44,28 @@ public class CatchActivity extends AppCompatActivity {
     }
 
     void initData(){
-        //通过cursor将数据放到catchList中
-        dbHelper = new CatchDBHelper(CatchActivity.this,"Rain_DB",null,1);
-        db = dbHelper.getReadableDatabase();
-        cursor =db.query("Catchment",null,null,null,null,null,null);
-        catchList = new ArrayList<>();
-        while (cursor.moveToNext()){
-            item = new CatchItem(cursor.getString(0),cursor.getString(1));
-            catchList.add(item);
-        }
-        cursor.close();
+        catchList = new ArrayList<CatchItem>(){{
+            add(new CatchItem("绿化屋面(绿色屋顶,基质层厚度≥300mm)", 0.35f));
+            add(new CatchItem("硬屋面、未铺石子的平屋面、沥青屋面", 0.85f));
+            add(new CatchItem("铺石子的平屋面", 0.65f));
+            add(new CatchItem("混凝土或沥青路面及广场", 0.85f));
+            add(new CatchItem("大块石等铺砌路面及广场", 0.55f));
+            add(new CatchItem("沥青表面处理的碎石路面及广场", 0.50f));
+            add(new CatchItem("级配碎石路面及广场", 0.40f));
+            add(new CatchItem("干砌砖石或碎石路面及广场", 0.40f));
+            add(new CatchItem("非铺砌土路面", 0.30f));
+            add(new CatchItem("绿地", 0.15f));
+            add(new CatchItem("下沉式绿地", 0.15f));
+            add(new CatchItem("水面", 1.00f));
+            add(new CatchItem("地下建筑覆土绿地（覆土≥500mm）", 0.15f));
+            add(new CatchItem("地下建筑覆土绿地（覆土<500mm）", 0.35f));
+            add(new CatchItem("透水铺装地面", 0.20f));
+        }};
+        catchSave = new ListDataSave(CatchActivity.this, "catchment");
+        catchSave.setDataList("catchment", catchList);
 
-        //将catchList放到本页面的adapter中
-        adapter = new CatchAdapter(this, catchList);
+        adapter = new CatchAdapter(CatchActivity.this);
         listView.setAdapter(adapter);
-        db.close();
 
         //设置Button监听
         btAdd.setOnClickListener(new View.OnClickListener() {

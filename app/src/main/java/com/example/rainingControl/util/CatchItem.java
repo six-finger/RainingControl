@@ -4,9 +4,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class CatchItem {
-    private String type, coefficient;
+    private String type;
+    private float coefficient;
 
-    public CatchItem(String type, String coefficient) {
+    public CatchItem(String type, float coefficient) {
         this.type = type;
         this.coefficient = coefficient;
     }
@@ -14,7 +15,7 @@ public class CatchItem {
     public String getType() {
         return type;
     }
-    public String getCoefficient() {
+    public float getCoefficient() {
         return coefficient;
     }
 

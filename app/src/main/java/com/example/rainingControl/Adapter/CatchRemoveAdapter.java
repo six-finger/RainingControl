@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CatchRemoveAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    public static List<CatchItem> catchListTemp = new ArrayList<>();             //为所有在该页面上显示的item建立一个列表
+    private List<CatchItem> catchListTemp;             //为所有在该页面上显示的item建立一个临时列表
     public static List<CatchItem> deletedList = new ArrayList<>();             //将所有 待删除的item 放入该List中
 
     public CatchRemoveAdapter(Context context, List<CatchItem> iList) {
@@ -30,7 +30,7 @@ public class CatchRemoveAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public CatchItem getItem(int position) {
         return catchListTemp.get(position);
     }
 
@@ -55,15 +55,11 @@ public class CatchRemoveAdapter extends BaseAdapter {
         }
         CatchItem item = catchListTemp.get(position);
         holder.tvType.setText(item.getType());
-        holder.tvCoefficient.setText(item.getCoefficient());
-        //点击删除后：
-        // 1. 将该值传入列表deletedList中（为后续在数据库中、在删掉这些记录）
-        // 3. 在itemList中删除该值，刷新当前界面
+        holder.tvCoefficient.setText(String.valueOf(item.getCoefficient()));
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletedList.add((CatchItem) getItem(position));
-                Long p = getItemId(position);
+                deletedList.add(getItem(position));
                 catchListTemp.remove(position);
                 notifyDataSetChanged();
             }

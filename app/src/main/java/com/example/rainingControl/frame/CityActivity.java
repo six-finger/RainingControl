@@ -14,6 +14,11 @@ import android.widget.TextView;
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.ExitActivityUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.rainingControl.frame.MainActivity.resultList;
+
 public class CityActivity extends AppCompatActivity {
     private TextView textRainfall;
     private Spinner spinnerCity, spinnerRatio;
@@ -94,6 +99,8 @@ public class CityActivity extends AppCompatActivity {
         btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resultList.add(0,key);
+                resultList.add(1,String.valueOf(rainfall));
                 Intent intent = new Intent(CityActivity.this, CatchActivity.class);
                 startActivity(intent);
             }
