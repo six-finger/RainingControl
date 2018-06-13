@@ -14,7 +14,7 @@ import static com.example.rainingControl.frame.MainActivity.resultList;
 public class ResultAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private String valueItem;
-    private String[] indexArray = new String[]{"年径流总量控制率","设计降雨量"};
+    private String[] indexArray = new String[]{"年径流总量控制率","设计降雨量","综合径流系数φ","项目占地面积(m²)","下垫面改造率","雨水花园率"};
     //private String[] indexArray = new String[]{"年径流总量控制率","设计降雨量","综合径流系数φ","项目占地面积(m²)","下垫面改造率","雨水花园率","控制容积(m²)","设计降雨控制量(m³)","单位面积控制容量(m³)","当前设计降雨控制量(m³)","当前设计降雨量(mm)","当前年径流总量控制率","达到目标还需调蓄容积(m³)"};
 
     public ResultAdapter(Context context) {
@@ -23,7 +23,7 @@ public class ResultAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return resultList.size();
+        return indexArray.length;
     }
 
     @Override

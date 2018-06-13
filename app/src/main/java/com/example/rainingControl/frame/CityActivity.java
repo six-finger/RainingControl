@@ -63,7 +63,6 @@ public class CityActivity extends AppCompatActivity {
         final ArrayAdapter<String> adapterRatios1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ratios1);
 
         spinnerCity.setAdapter(adapterCities);
-        spinnerCity.setSelection(0,false);   //???test
         spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

@@ -1,4 +1,4 @@
-package com.example.rainingControl.frame;
+package com.example.rainingControl.dialog;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;

@@ -18,6 +18,7 @@ import java.util.List;
 
 import static com.example.rainingControl.Adapter.CatchRemoveAdapter.deletedList;
 import static com.example.rainingControl.frame.CatchAddActivity.catchAdd;
+import static com.example.rainingControl.frame.MainActivity.resultList;
 
 public class CatchActivity extends AppCompatActivity {
     private ListView listView;
@@ -91,6 +92,8 @@ public class CatchActivity extends AppCompatActivity {
         btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                resultList.add(2,);
+//                resultList.add(3,);
                 Intent intent = new Intent(CatchActivity.this, LidActivity.class);
                 startActivity(intent);
             }

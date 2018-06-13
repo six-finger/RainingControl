@@ -67,4 +67,5 @@ public class LidAdapter extends BaseAdapter{
     private class ViewHolder{
         TextView lidType, lidName, area, depth, ratio, volumeControl;
     }
+
 }

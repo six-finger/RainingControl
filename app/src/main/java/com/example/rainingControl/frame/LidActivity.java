@@ -9,11 +9,14 @@ import android.widget.ListView;
 
 import com.example.rainingControl.Adapter.LidAdapter;
 import com.example.rainingControl.R;
+import com.example.rainingControl.dialog.LidAddDialog;
 import com.example.rainingControl.util.ExitActivityUtil;
 import com.example.rainingControl.util.LidItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.rainingControl.frame.MainActivity.resultList;
 
 public class LidActivity extends AppCompatActivity {
 
@@ -50,6 +53,7 @@ public class LidActivity extends AppCompatActivity {
     private void initData() {
         adapter = new LidAdapter(LidActivity.this);
         listView.setAdapter(adapter);
+
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +76,8 @@ public class LidActivity extends AppCompatActivity {
         btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                resultList.add(4,);
+//                resultList.add(5,);
                 Intent intent = new Intent(LidActivity.this, ResultActivity.class);
                 startActivity(intent);
             }

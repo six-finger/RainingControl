@@ -1,5 +1,6 @@
 package com.example.rainingControl.frame;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class ResultActivity extends AppCompatActivity {
     private ListView listView;
     private Button btSave, btBack, btMain;
     private ResultAdapter adapter;
+    private Boolean committed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class ResultActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         resultSave.setDataList(tvTitle.getText().toString(), resultList);
+                        committed = true;
                         dialog.dismiss();
                     }
                 });
@@ -84,7 +87,11 @@ public class ResultActivity extends AppCompatActivity {
         btMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExitActivityUtil.getInstance().initMain();
+                if (committed)  ExitActivityUtil.getInstance().initMain();
+                else {
+                    Intent intent = new Intent(ResultActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
