@@ -9,15 +9,19 @@ import android.widget.TextView;
 
 import com.example.rainingControl.R;
 
+import java.util.List;
+
 import static com.example.rainingControl.frame.MainActivity.resultList;
 
 public class ResultAdapter extends BaseAdapter{
+    private List<String> list;
     private LayoutInflater inflater;
     private String valueItem;
     private String[] indexArray = new String[]{"年径流总量控制率","设计降雨量","综合径流系数φ","项目占地面积(m²)","下垫面改造率","雨水花园率"};
     //private String[] indexArray = new String[]{"年径流总量控制率","设计降雨量","综合径流系数φ","项目占地面积(m²)","下垫面改造率","雨水花园率","控制容积(m²)","设计降雨控制量(m³)","单位面积控制容量(m³)","当前设计降雨控制量(m³)","当前设计降雨量(mm)","当前年径流总量控制率","达到目标还需调蓄容积(m³)"};
 
-    public ResultAdapter(Context context) {
+    public ResultAdapter(Context context, List<String> list) {
+        this.list = list;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -50,7 +54,7 @@ public class ResultAdapter extends BaseAdapter{
         }
         notifyDataSetChanged();
         holder.tvIndex.setText(indexArray[position]);
-        holder.tvValue.setText(resultList.get(position));
+        holder.tvValue.setText(list.get(position));
         return convertView;
     }
 

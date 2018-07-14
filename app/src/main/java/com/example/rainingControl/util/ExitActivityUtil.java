@@ -14,9 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 public class ExitActivityUtil extends AppCompatActivity {
     public List<Activity> activityList = new LinkedList();         //Activity 容器
     private static ExitActivityUtil instance;
-    private ExitActivityUtil(){
+    private ExitActivityUtil(){    }
 
-    }
     /**
      * 单例,获取唯一的ExitActivity 实例
      */
@@ -27,6 +26,7 @@ public class ExitActivityUtil extends AppCompatActivity {
         }
         return instance;
     }
+
     /**
      * 添加Activity 到容器中
      * @param activity
@@ -34,6 +34,7 @@ public class ExitActivityUtil extends AppCompatActivity {
     public void addActivity(Activity activity){
         activityList.add(activity);
     }
+
     /**
      * 遍历所有Activity 并退出
      */
@@ -42,11 +43,5 @@ public class ExitActivityUtil extends AppCompatActivity {
             activity.finish();
         }
         System.exit(0);
-    }
-
-    public void initMain() {
-        for (int i=activityList.size()-1;i>0;i--) {
-            activityList.get(i).finish();
-        }
     }
 }

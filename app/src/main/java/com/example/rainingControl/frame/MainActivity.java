@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btHistory;
     private Button btExit;
     public static List<String> resultList;
-    public static ListDataSave resultSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

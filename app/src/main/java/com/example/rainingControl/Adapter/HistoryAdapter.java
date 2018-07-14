@@ -1,6 +1,8 @@
 package com.example.rainingControl.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,27 +10,28 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.rainingControl.R;
+import com.example.rainingControl.util.ListDataSave;
 
-import static com.example.rainingControl.frame.MainActivity.resultSave;
+import java.util.List;
 
 public class HistoryAdapter extends BaseAdapter {
     private LayoutInflater inflater;
+    private ListDataSave resultSave;
+    private Context context;
 
-    public HistoryAdapter(Context context) {
+    public HistoryAdapter(Context context, ListDataSave resultSave) {
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
+        this.resultSave = resultSave;
     }
 
     @Override
     public int getCount() {
-        if (resultSave ==null)
-            return 0;
         return resultSave.getTagList().size();
     }
 
     @Override
     public Object getItem(int position) {
-        if (resultSave ==null)
-            return null;
         return resultSave.getTagList().get(position);
     }
 
@@ -39,18 +42,20 @@ public class HistoryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        final ViewHolder holder;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_history_all, parent, false);
             holder = new ViewHolder();
             holder.tvTitle = convertView.findViewById(R.id.tvTitle);
             convertView.setTag(holder);
         }
-        else
+        else {
             holder = (ViewHolder) convertView.getTag();
+        }
         notifyDataSetChanged();
         holder.tvTitle.setText(resultSave.getTagList().get(position));
-        holder.tvTitle.setTextSize(20);
+        holder.tvTitle.setHeight(80);
+        holder.tvTitle.setGravity(Gravity.CENTER_VERTICAL);
         return convertView;
     }
 

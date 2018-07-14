@@ -12,6 +12,7 @@
         <activity android:name=".frame.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -20,9 +21,10 @@
         <activity android:name=".frame.CatchRemoveActivity" />
         <activity android:name=".frame.CityActivity" />
         <activity android:name=".frame.HistoryActivity" />
-        <activity android:name=".frame.LidActivity"/>
-        <activity android:name=".frame.LidRemoveActivity"/>
-        <activity android:name=".frame.ResultActivity"/>
+        <activity android:name=".frame.LidActivity" />
+        <activity android:name=".frame.LidRemoveActivity" />
+        <activity android:name=".frame.ResultSaveActivity" />
+        <activity android:name=".frame.ResultShowActivity"></activity>
     </application>
 
 </manifest>

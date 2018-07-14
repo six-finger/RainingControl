@@ -5,19 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".frame.HistoryActivity">
+    tools:context="com.example.rainingControl.frame.ResultShowActivity">
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-    </ListView>
+        android:layout_weight="1" />
 
     <Button
-        android:id="@+id/btReturn"
+        android:id="@+id/btBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="返回" />
+
 </LinearLayout>

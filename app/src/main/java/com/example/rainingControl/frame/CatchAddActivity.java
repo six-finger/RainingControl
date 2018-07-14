@@ -52,7 +52,7 @@ public class CatchAddActivity extends AppCompatActivity {
                     Toast.makeText(CatchAddActivity.this, "系数应在 (0,1] 范围内", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                catchAdd = new CatchItem(String.valueOf(etType.getText()),coefficient);
+                catchAdd = new CatchItem(String.valueOf(etType.getText()),coefficient,0);
                 /*dbHelper = new CatchDBHelper(CatchAddActivity.this,"Rain_DB",null,1);
                 db = dbHelper.getReadableDatabase();
                 db.execSQL("insert into Catchment(type,coefficient) values(?, ?);", new Object[]{catchAdd.getType(), catchAdd.getCoefficient()});*/

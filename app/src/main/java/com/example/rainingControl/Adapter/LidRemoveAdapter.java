@@ -12,16 +12,18 @@ import android.widget.TextView;
 import com.example.rainingControl.R;
 import com.example.rainingControl.util.LidItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.rainingControl.frame.LidActivity.lidList;
 
 public class LidRemoveAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    public static List<LidItem> lidListTemp = lidList;
+    private List<LidItem> lidListTemp;
 
-    public LidRemoveAdapter(Context context) {
+    public LidRemoveAdapter(Context context, List<LidItem> lidListTemp) {
         this.inflater = LayoutInflater.from(context);
+        this.lidListTemp = lidListTemp;
     }
     @Override
     public int getCount() {
@@ -67,6 +69,8 @@ public class LidRemoveAdapter extends BaseAdapter {
             public void onClick(View v) {
                 lidListTemp.remove(position);
                 notifyDataSetChanged();
+                Log.e("sf", "onClick: "+lidListTemp);
+                Log.e("sg", "onClick: "+lidList);
             }
         });
         return convertView;

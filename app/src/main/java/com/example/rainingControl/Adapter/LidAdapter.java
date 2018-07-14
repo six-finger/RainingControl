@@ -64,6 +64,22 @@ public class LidAdapter extends BaseAdapter{
         return convertView;
     }
 
+    public float getArea1(){
+        float area = 0;
+        for (LidItem item : lidList) {
+            if (item.getLidType()=="下垫面改造") area += item.getArea();
+        }
+        return area;
+    }
+
+    public float getArea2(){
+        float area = 0;
+        for (LidItem item : lidList) {
+            if (item.getLidType()=="雨水花园") area += item.getArea();
+        }
+        return area;
+    }
+
     private class ViewHolder{
         TextView lidType, lidName, area, depth, ratio, volumeControl;
     }

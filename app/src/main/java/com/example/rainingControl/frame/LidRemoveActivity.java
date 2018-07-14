@@ -10,13 +10,17 @@ import android.widget.ListView;
 
 import com.example.rainingControl.Adapter.LidRemoveAdapter;
 import com.example.rainingControl.R;
+import com.example.rainingControl.util.LidItem;
 
-import static com.example.rainingControl.Adapter.LidRemoveAdapter.lidListTemp;
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.example.rainingControl.frame.LidActivity.lidList;
 
 public class LidRemoveActivity extends AppCompatActivity {
     private ListView listView;
     private Button btSave, btCancel;
+    private List<LidItem> lidListTemp = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +37,8 @@ public class LidRemoveActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        LidRemoveAdapter adapter = new LidRemoveAdapter(LidRemoveActivity.this);
+        lidListTemp.addAll(lidList);
+        LidRemoveAdapter adapter = new LidRemoveAdapter(LidRemoveActivity.this, lidListTemp);
         listView.setAdapter(adapter);
 
         btSave.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +52,8 @@ public class LidRemoveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                Log.e("sf", "onClick: "+lidListTemp);
+                Log.e("sg", "onClick: "+lidList);
             }
         });
     }

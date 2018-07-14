@@ -3,4 +3,6 @@
     <string name="Back">上一步</string>
     <string name="Next">下一步</string>
     <string name="select">请选择</string>
+    <item name="tag_item" type="id"></item>
+    <item name="tag_position" type="id"></item>
 </resources>
